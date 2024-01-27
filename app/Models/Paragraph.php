@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Paragraph extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'content'
+    ];
 }

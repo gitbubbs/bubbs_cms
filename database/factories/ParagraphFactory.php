@@ -17,7 +17,7 @@ class ParagraphFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'content' => fake()->sentence(100)
         ];
     }
 }
