@@ -17,7 +17,7 @@
 ### -Categories
 ### -Tags
 ### -Pages
-### -Media gallery
-### -Themes file (Fonts, Colors etc...)
+### -Media gallery ( Cloudinary? )
+### -Themes file ( Fonts, Colors etc... )
 ### -Basic setup for email service
 *...this is going to be updated along the way*
