@@ -2,65 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 use App\Models\Post;
+
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Get all posts with its images and paragraphs
+
     public function index()
     {
-        //
+        $posts = Post::with('paragraphs', 'images')->where('is_deleted', false)->get();
+
+        if(isset($posts) && !empty($posts)) {
+            return response()->json($posts);
+        } else {
+            return response()->json([
+                'bubbs_message' => 'There are no posts to see here my dude'
+            ]);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // Store a new post with only its title
+
+    public function store(Request $request)
     {
-        //
+        $bubbs_data = $request; 
+
+        $post = new Post();
+        $post->title = $bubbs_data['title'];
+
+        $post->save();
+
+        if (isset($post) && !empty($post)) {
+                return response()->json($post);
+            } else {
+                return response()->json([
+                    'bubbs_message' => 'You need to provide a title for your post to be created'
+                ]);
+            }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePostRequest $request)
-    {
-        //
-    }
+    // Update an allready existing post by providing an id and a new title
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
+    public function update(Request $request) 
     {
-        //
-    }
+        $bubbs_data = $request;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePostRequest $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        //
+        $post = Post::where('id', $bubbs_data['id'])->first();
+    
+        if (!$post) {
+            return response()->json([
+                'bubbs_message' => 'Sorry, cant find the post you are looking for'
+            ]);
+        }
+    
+        $post->title = $bubbs_data['title'];
+    
+        $post->save();
+    
+        return response()->json($post);
     }
 }
