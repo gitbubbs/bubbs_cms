@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Post;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Paragraph>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
  */
-class ParagraphFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,9 @@ class ParagraphFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => fake()->sentence(10),
+            'url' => 'https://source.unsplash.com/random',
+            'alt' => fake()->sentence(10),
+            'desc' => fake()->sentence(10),
             'post_id' => Post::inRandomOrder()->first()->id
         ];
     }

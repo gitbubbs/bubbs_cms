@@ -18,4 +18,19 @@ class Post extends Model
     {
         return $this->hasMany(Paragraph::class);
     }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    // public function categories(): HasMany
+    // {
+        
+    // }
+
+    // public function tags(): HasMany
+    // {
+
+    // }
 }
