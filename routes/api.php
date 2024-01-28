@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ParagraphController;
 
 
 /*
@@ -24,8 +25,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     
 // })->middleware('auth');
 
-Route::get('/posts', [PostController::class, 'index']);
+// POST ROUTES
 
-Route::post('/posts', [PostController::class, 'store']);
+Route::post('/get_posts', [PostController::class, 'index']);
 
-Route::post('/posts', [PostController::class, 'update']);
+Route::post('/store_posts', [PostController::class, 'store']);
+
+Route::post('/update_posts', [PostController::class, 'update']);
+
+Route::post('/single_post', [PostController::class, 'single']);
+
+Route::post('/delete_post', [PostController::class, 'delete']);
+
+// PARAGRAPH ROUTES
+
+Route::post('/store_paragraph', [ParagraphController::class, 'store']);
+
+Route::post('/delete_paragraph', [ParagraphController::class, 'delete']);

@@ -2,65 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreParagraphRequest;
-use App\Http\Requests\UpdateParagraphRequest;
+use Illuminate\Http\Request;
 use App\Models\Paragraph;
 
 class ParagraphController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function store(Request $request)
     {
-        //
+        $bubbs_data = $request;
+
+        $paragraph = new Paragraph();
+
+        $paragraph->content = $bubbs_data['content'];
+
+        $paragraph->post_id = $bubbs_data['post_id'];
+
+        $paragraph->save();
+
+        if(isset($paragraph) && !empty($paragraph)) {
+            return response()->json($paragraph);
+        } else {
+            return response()->json([
+                'bubbs_message' => 'You need to bring something to the table'
+            ]);
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function delete(Request $request)
     {
-        //
+        $bubbs_data = $request;
+
+        $paragraph = Paragraph::where('id', $bubbs_data['id']);
+
+        $paragraph->is_deleted = $bubbs_data['is_deleted'];
+
+        $paragraph->save();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreParagraphRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Paragraph $paragraph)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Paragraph $paragraph)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateParagraphRequest $request, Paragraph $paragraph)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Paragraph $paragraph)
-    {
-        //
-    }
 }

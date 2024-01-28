@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('paragraphs', function (Blueprint $table) {
             $table->id();
             $table->string('content');
+            $table->boolean('is_deleted')->default(0);
             $table->foreignId('post_id')->constrained(
                 table: 'posts', indexName: 'posts_paragraph_id'
             );
