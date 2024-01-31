@@ -76,7 +76,7 @@ class PostController extends Controller
 
         $post = Post::where('id', $bubbs_data['id'])->first();
     
-        if (!$post) {
+        if(!$post) {
             return response()->json([
                 'bubbs_message' => 'Sorry, cant find the post you are looking for'
             ]);

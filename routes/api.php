@@ -39,7 +39,12 @@ Route::post('/delete_post', [PostController::class, 'delete']);
 
 // PARAGRAPH ROUTES
 
+Route::post('/get_paragraph', [ParagraphController::class, 'index']);
+
 Route::post('/store_paragraph', [ParagraphController::class, 'store']);
 
+Route::post('/update_paragraph', [ParagraphController::class, 'update']);
+
 Route::post('/delete_paragraph', [ParagraphController::class, 'delete']);
-// yolo
+
+
